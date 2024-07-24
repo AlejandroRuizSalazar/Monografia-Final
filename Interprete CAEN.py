@@ -163,10 +163,8 @@ for i in tqdm(range(len(unique_timestamps))):
                 Channel['Conteos'].append(df['Cnt'][j])
                 Channel['Tiempo'].append(Conversiondetiempo(tiempo)[1])
         j += 1
-    print(Intervalodetiempo,unique_timestamps[i],Channel['Canales'],Channel['Conteos'])
     # Verificar si hay al menos un conteo mayor a 0
     if any(int(c) > 0 for c in Channel['Conteos']):
-        print('dentro',Intervalodetiempo,unique_timestamps[i],Channel['Canales'],Channel['Conteos'])
         Intervalodetiempo += 1
         DiccionarioPrincipal[Intervalodetiempo] = {}
         DiccionarioPrincipal[Intervalodetiempo]['Instante de Tiempo'] = i+1
