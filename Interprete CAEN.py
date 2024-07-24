@@ -24,7 +24,24 @@ cnts = []
 # Lista para almacenar timestamps únicos
 unique_timestamps = []
 
+##Comprobar muones
 
+def Comprobaciónor(Canales):
+    in_range_0_31 = False
+    in_range_32_63 = False
+
+    for canal in Canales:
+        if 0 <= int(canal) <= 31:
+            in_range_0_31 = True
+        elif 32 <= int(canal) <= 63:
+            in_range_32_63 = True
+
+    # Si ya encontramos un número en cada rango, podemos dejar de buscar
+    if in_range_0_31 and in_range_32_63:
+        return True
+    else:
+        return False
+        
 ##Decimales
 
 def Conversiondetiempo(value):
@@ -164,13 +181,14 @@ for i in tqdm(range(len(unique_timestamps))):
                 Channel['Tiempo'].append(Conversiondetiempo(tiempo)[1])
         j += 1
     # Verificar si hay al menos un conteo mayor a 0
-    if any(int(c) > 0 for c in Channel['Conteos']):
+    muon = Comprobaciónor(Channel['Canales'])
+    if muon == True :
         Intervalodetiempo += 1
-        DiccionarioPrincipal[Intervalodetiempo] = {}
-        DiccionarioPrincipal[Intervalodetiempo]['Instante de Tiempo'] = i+1
-        DiccionarioPrincipal[Intervalodetiempo]['TStamp'] = unique_timestamps[i]
-        DiccionarioPrincipal[Intervalodetiempo]['Trigger ID'] = df['TrgID'][j-1]
-        DiccionarioPrincipal[Intervalodetiempo]['Channel'] = Channel
+        Soyhomelochino[Intervalodetiempo] = {}
+        Soyhomelochino[Intervalodetiempo]['Instante de Tiempo'] = i+1
+        Soyhomelochino[Intervalodetiempo]['TStamp'] = unique_timestamps[i]
+        Soyhomelochino[Intervalodetiempo]['Trigger ID'] = df['TrgID'][j-1]
+        Soyhomelochino[Intervalodetiempo]['Channel'] = Channel
 
 ##Creación del histograma
 
